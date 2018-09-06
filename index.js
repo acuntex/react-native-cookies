@@ -3,6 +3,7 @@ import { NativeModules, Platform } from 'react-native';
 const invariant = require('invariant');
 const RNCookieManagerIOS = NativeModules.RNCookieManagerIOS;
 const RNCookieManagerAndroid = NativeModules.RNCookieManagerAndroid;
+const RNCookieManagerWindows = NativeModules.RNCookieManagerWindows;
 
 let CookieManager;
 
@@ -14,6 +15,10 @@ if (Platform.OS === 'ios') {
     invariant(RNCookieManagerAndroid,
         'react-native-cookies: Import libraries to android "react-native link react-native-cookies"');
     CookieManager = RNCookieManagerAndroid;
+} else if (Platform.OS === 'windows') {
+    invariant(RNCookieManagerWindows,
+        'react-native-cookies: Import libraries to windows "react-native link react-native-cookies"');
+    CookieManager = RNCookieManagerWindows;
 } else {
     invariant(CookieManager, 'react-native-cookies: Invalid platform. This library only supports Android and iOS.');
 }
